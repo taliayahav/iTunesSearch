@@ -6,6 +6,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
 public interface ItunesSearchService {
-    @GET("?term=")
+    @GET("?term")
     Single<ItunesSearchFeed> getSong(@Query("term") String term);
 }

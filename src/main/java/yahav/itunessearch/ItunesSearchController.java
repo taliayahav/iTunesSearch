@@ -13,11 +13,13 @@ public class ItunesSearchController {
     TextField songAnswer;
     @FXML
     Label songList;
+    @FXML
+    Label artist;
 
     public void onSubmit(MouseEvent mouseEvent) {
         ItunesSearchServiceFactory factory = new ItunesSearchServiceFactory();
         ItunesSearchService service = factory.newInstance();
-
+//
         Disposable currentDisposable = service.getSong(songAnswer.getText())
                 // request the data in the background
                 .subscribeOn(Schedulers.io())
@@ -31,7 +33,8 @@ public class ItunesSearchController {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                songList.setText(String.valueOf(itunesSearchFeed.trackName));
+                songList.setText(String.valueOf(itunesSearchFeed.results.get(0).trackName));
+                artist.setText(String.valueOf(itunesSearchFeed.results.get(0).artistName));
             }
         });
     }

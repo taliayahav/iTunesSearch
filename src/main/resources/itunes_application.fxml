@@ -15,4 +15,5 @@
     <ToggleButton fx:id="submitButton" onMouseClicked="#onSubmit" text= "Submit"
                   GridPane.columnIndex="18" GridPane.rowIndex="1"/>
     <Label fx:id="songList" GridPane.columnIndex="5" GridPane.rowIndex="2"/>
+    <Label fx:id="artist" GridPane.columnIndex="5" GridPane.rowIndex="3"/>
 </GridPane>
