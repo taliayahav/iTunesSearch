@@ -4,37 +4,76 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+
+import java.util.ArrayList;
 
 public class ItunesSearchController {
     @FXML
-    TextField songAnswer;
+    TextField answerResult;
     @FXML
-    Label songList;
+    ArrayList<Label> songList;
     @FXML
-    Label artist;
+    ArrayList<Label> artist;
+    @FXML
+    ArrayList<ImageView> image;
+    @FXML
+    ArrayList<Label> albumNames;
+    @FXML
+    ArrayList<ImageView> albumImages;
 
     public void onSubmit(MouseEvent mouseEvent) {
         ItunesSearchServiceFactory factory = new ItunesSearchServiceFactory();
         ItunesSearchService service = factory.newInstance();
-//
-        Disposable currentDisposable = service.getSong(songAnswer.getText())
+//        HBox hBox = new HBox();
+//        hBox.setStyle("-fx-border-color: black");
+//        hBox.setPadding(new Insets(15, 12, 15, 12));
+//        hBox.setSpacing(10);
+
+        Disposable disposable = service.getSong(answerResult.getText())
                 // request the data in the background
                 .subscribeOn(Schedulers.io())
                 // work with the data in the foreground
                 .observeOn(Schedulers.trampoline())
                 // work with the feed whenever it gets downloaded
                 .subscribe(this::onItunesSearchFeed, this::onError);
+
+        Disposable currentDisposable = service.getAlbum(answerResult.getText())
+                // request the data in the background
+                .subscribeOn(Schedulers.io())
+                // work with the data in the foreground
+                .observeOn(Schedulers.trampoline())
+                // work with the feed whenever it gets downloaded
+                .subscribe(this::onAlbumSearchFeed, this::onError);
+    }
+
+    private void onAlbumSearchFeed(AlbumSearchFeed albumSearchFeed) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                for (int i= 0; i <= 5; i++) {
+                    albumNames.get(i).setText(String.valueOf(albumSearchFeed.albumResults.get(i).collectionName));
+                    albumImages.get(i).setImage(new Image(albumSearchFeed.albumResults.get(i).collectionViewUrl));
+                }
+            }
+        });
     }
 
     private void onItunesSearchFeed(ItunesSearchFeed itunesSearchFeed) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                songList.setText(String.valueOf(itunesSearchFeed.results.get(0).trackName));
-                artist.setText(String.valueOf(itunesSearchFeed.results.get(0).artistName));
+                for (int i= 0; i <= 5; i++) {
+                    songList.get(i).setText(String.valueOf(itunesSearchFeed.results.get(i).trackName));
+                    artist.get(i).setText(String.valueOf(itunesSearchFeed.results.get(i).artistName));
+                    image.get(i).setImage(new Image(itunesSearchFeed.results.get(i).artworkUrl60));
+                }
             }
         });
     }
