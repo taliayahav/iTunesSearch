@@ -12,7 +12,4 @@ public class AlbumSearchFeed {
         String collectionViewUrl;
         String artistViewUrl;
     }
-//    public String Kind(){
-//        return kind;
-//    }
 }
