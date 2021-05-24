@@ -16,10 +16,10 @@
     <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
 <!--    <Label fx:id="#label" stylesheets="itunessearch.css" GridPane.rowIndex="2" GridPane.columnIndex="0"/>-->
     <ImageView fx:id="searchImage" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-    <TextField fx:id="answerResult" GridPane.columnSpan="15"
+    <TextField fx:id="answerResult" GridPane.columnSpan="5"
                GridPane.columnIndex="7" GridPane.rowIndex="0"/>
     <ToggleButton fx:id="submitButton" onMouseClicked="#onSubmit" text= "Submit"
-                  GridPane.columnIndex="18" GridPane.rowIndex="1"/>
+                  GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="5"/>
 <!--    <HBox fx:id="top"-->
 <!--          GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="25"-->
 <!--          style="-fx-border-color: black">-->
@@ -37,9 +37,9 @@
     <Label fx:id="song4" GridPane.columnIndex="5" GridPane.rowIndex="7"/>
     <Label fx:id="artist4" GridPane.columnIndex="8" GridPane.rowIndex="7"/>
     <ImageView fx:id="image4" GridPane.columnIndex="4" GridPane.rowIndex="7" fitHeight="25" fitWidth="25"/>
-    <Label fx:id="song5" GridPane.columnIndex="5" GridPane.rowIndex="8"/>
-    <Label fx:id="artist5" GridPane.columnIndex="8" GridPane.rowIndex="8"/>
-    <ImageView fx:id="image5" GridPane.columnIndex="4" GridPane.rowIndex="8" fitHeight="25" fitWidth="25"/>
+    <Label fx:id="song5" GridPane.columnIndex="5" GridPane.rowIndex="8" GridPane.rowSpan="1"/>
+    <Label fx:id="artist5" GridPane.columnIndex="8" GridPane.rowIndex="8" GridPane.rowSpan="1"/>
+    <ImageView fx:id="image5" GridPane.columnIndex="4" GridPane.rowIndex="8" fitHeight="25" fitWidth="25" GridPane.rowSpan="1"/>
     <fx:define>
         <ArrayList fx:id="songList" >
             <fx:reference source="song1"/>
@@ -68,16 +68,16 @@
         </ArrayList>
     </fx:define>
 
-    <Label fx:id="album1" GridPane.columnIndex="0" GridPane.rowIndex="12" GridPane.columnSpan="4"/>
-    <Label fx:id="album2" GridPane.columnIndex="4" GridPane.rowIndex="12" GridPane.columnSpan="4"/>
-    <Label fx:id="album3" GridPane.columnIndex="8" GridPane.rowIndex="12" GridPane.columnSpan="4"/>
-    <Label fx:id="album4" GridPane.columnIndex="12" GridPane.rowIndex="12" GridPane.columnSpan="4"/>
-    <Label fx:id="album5" GridPane.columnIndex="16" GridPane.rowIndex="12" GridPane.columnSpan="4"/>
-    <ImageView fx:id="albumImage1" GridPane.columnIndex="4" GridPane.rowIndex="5" fitHeight="25" fitWidth="25"/>
-    <ImageView fx:id="albumImage2" GridPane.columnIndex="4" GridPane.rowIndex="5" fitHeight="25" fitWidth="25"/>
-    <ImageView fx:id="albumImage3" GridPane.columnIndex="4" GridPane.rowIndex="5" fitHeight="25" fitWidth="25"/>
-    <ImageView fx:id="albumImage4" GridPane.columnIndex="4" GridPane.rowIndex="5" fitHeight="25" fitWidth="25"/>
-    <ImageView fx:id="albumImage5" GridPane.columnIndex="4" GridPane.rowIndex="5" fitHeight="25" fitWidth="25"/>
+    <Label fx:id="album1" GridPane.columnIndex="0" GridPane.rowIndex="12" GridPane.columnSpan="1"/>
+    <Label fx:id="album2" GridPane.columnIndex="2" GridPane.rowIndex="12" GridPane.columnSpan="1"/>
+    <Label fx:id="album3" GridPane.columnIndex="4" GridPane.rowIndex="12" GridPane.columnSpan="1"/>
+    <Label fx:id="album4" GridPane.columnIndex="6" GridPane.rowIndex="12" GridPane.columnSpan="1"/>
+    <Label fx:id="album5" GridPane.columnIndex="8" GridPane.rowIndex="12" GridPane.columnSpan="1"/>
+    <ImageView fx:id="albumImage1" GridPane.columnIndex="0" GridPane.rowIndex="13" GridPane.columnSpan="1"/>
+    <ImageView fx:id="albumImage2" GridPane.columnIndex="2" GridPane.rowIndex="13" GridPane.columnSpan="1"/>
+    <ImageView fx:id="albumImage3" GridPane.columnIndex="4" GridPane.rowIndex="13" GridPane.columnSpan="1"/>
+    <ImageView fx:id="albumImage4" GridPane.columnIndex="6" GridPane.rowIndex="13" GridPane.columnSpan="1"/>
+    <ImageView fx:id="albumImage5" GridPane.columnIndex="8" GridPane.rowIndex="13" GridPane.columnSpan="1"/>
 
 
     <fx:define>
@@ -98,5 +98,4 @@
             <fx:reference source="albumImage5"/>
         </ArrayList>
     </fx:define>
-
 </GridPane>

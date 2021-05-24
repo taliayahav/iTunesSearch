@@ -12,7 +12,7 @@ public class ItunesSearchApplication extends Application {
         public void start(Stage stage) throws Exception {
             Parent root = FXMLLoader.load(getClass().getResource("/itunes_application.fxml"));
 
-            Scene scene = new Scene(root, 500, 500);
+            Scene scene = new Scene(root, 800, 500);
 
             stage.setTitle("iTunes");
             stage.setScene(scene);

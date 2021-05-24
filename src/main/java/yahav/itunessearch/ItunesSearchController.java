@@ -28,13 +28,15 @@ public class ItunesSearchController {
     @FXML
     ArrayList<ImageView> albumImages;
 
+    ItunesSearchService service;
+
+//    public ItunesSearchController(ItunesSearchService service) {
+//        this.service = service;
+//    }
+
     public void onSubmit(MouseEvent mouseEvent) {
         ItunesSearchServiceFactory factory = new ItunesSearchServiceFactory();
         ItunesSearchService service = factory.newInstance();
-//        HBox hBox = new HBox();
-//        hBox.setStyle("-fx-border-color: black");
-//        hBox.setPadding(new Insets(15, 12, 15, 12));
-//        hBox.setSpacing(10);
 
         Disposable disposable = service.getSong(answerResult.getText())
                 // request the data in the background
@@ -58,8 +60,8 @@ public class ItunesSearchController {
             @Override
             public void run() {
                 for (int i= 0; i <= 5; i++) {
-                    albumNames.get(i).setText(String.valueOf(albumSearchFeed.albumResults.get(i).collectionName));
-                    albumImages.get(i).setImage(new Image(albumSearchFeed.albumResults.get(i).collectionViewUrl));
+                    albumNames.get(i).setText(String.valueOf(albumSearchFeed.results.get(i).collectionName));
+                    albumImages.get(i).setImage(new Image(albumSearchFeed.results.get(i).artworkUrl100));
                 }
             }
         });
@@ -80,5 +82,4 @@ public class ItunesSearchController {
 
     private void onError(Throwable throwable) {
     }
-
 }
