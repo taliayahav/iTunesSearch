@@ -13,30 +13,39 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItunesSearchController {
     @FXML
     TextField answerResult;
     @FXML
-    ArrayList<Label> songList;
+    List<Label> songList;
     @FXML
-    ArrayList<Label> artist;
+    List<Label> artist;
     @FXML
-    ArrayList<ImageView> image;
+    List<ImageView> image;
     @FXML
-    ArrayList<Label> albumNames;
+    List<Label> albumNames;
     @FXML
-    ArrayList<ImageView> albumImages;
+    List<ImageView> albumImages;
+
 
     ItunesSearchService service;
+    ItunesSearchServiceFactory factory = new ItunesSearchServiceFactory();
 
-//    public ItunesSearchController(ItunesSearchService service) {
-//        this.service = service;
-//    }
+    public void Initialize(){
+        service = factory.newInstance();
+    }
+
+
+    public ItunesSearchController(ItunesSearchService service) {
+        this.service = service;
+    }
+
 
     public void onSubmit(MouseEvent mouseEvent) {
-        ItunesSearchServiceFactory factory = new ItunesSearchServiceFactory();
-        ItunesSearchService service = factory.newInstance();
+//        ItunesSearchServiceFactory factory = new ItunesSearchServiceFactory();
+//        ItunesSearchService service = factory.newInstance();
 
         Disposable disposable = service.getSong(answerResult.getText())
                 // request the data in the background
@@ -55,19 +64,7 @@ public class ItunesSearchController {
                 .subscribe(this::onAlbumSearchFeed, this::onError);
     }
 
-    private void onAlbumSearchFeed(AlbumSearchFeed albumSearchFeed) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                for (int i= 0; i <= 5; i++) {
-                    albumNames.get(i).setText(String.valueOf(albumSearchFeed.results.get(i).collectionName));
-                    albumImages.get(i).setImage(new Image(albumSearchFeed.results.get(i).artworkUrl100));
-                }
-            }
-        });
-    }
-
-    private void onItunesSearchFeed(ItunesSearchFeed itunesSearchFeed) {
+    public void onItunesSearchFeed(ItunesSearchFeed itunesSearchFeed) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -80,6 +77,19 @@ public class ItunesSearchController {
         });
     }
 
-    private void onError(Throwable throwable) {
+    public void onAlbumSearchFeed(AlbumSearchFeed albumSearchFeed) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                for (int i= 0; i <= 5; i++) {
+                    albumNames.get(i).setText(String.valueOf(albumSearchFeed.results.get(i).collectionName));
+                    albumImages.get(i).setImage(new Image(albumSearchFeed.results.get(i).artworkUrl100));
+                }
+            }
+        });
+    }
+
+    public void onError(Throwable throwable) {
+        throwable.printStackTrace();
     }
 }

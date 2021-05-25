@@ -10,9 +10,14 @@ public class ItunesSearchApplication extends Application {
 
         @Override
         public void start(Stage stage) throws Exception {
-            Parent root = FXMLLoader.load(getClass().getResource("/itunes_application.fxml"));
 
-            Scene scene = new Scene(root, 800, 500);
+            ItunesSearchService service = new ItunesSearchServiceFactory().newInstance();
+            ItunesSearchController controller = new ItunesSearchController(service);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource( "/itunes_application.fxml"));
+            loader.setController(controller);
+            Parent parent = loader.load();
+
+            Scene scene = new Scene(parent, 800, 500);
 
             stage.setTitle("iTunes");
             stage.setScene(scene);
