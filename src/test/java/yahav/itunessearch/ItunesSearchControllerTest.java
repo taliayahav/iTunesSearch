@@ -50,6 +50,20 @@ public class ItunesSearchControllerTest {
     }
     @Test
     public void onSubmit(){
+        //given
+        onGiven();
+        answerResult = mock(TextField.class);
+        controller.answerResult =  answerResult;
+        doReturn(Single.never()).when(service).getSong("Taylor Swift");
+        doReturn(Single.never()).when(service).getAlbum("Taylor Swift");
+//        doReturn("Taylor Swift").when(controller.answerResult).getText();
+
+        //when
+        controller.onSubmit(mock(MouseEvent.class));
+
+        //then
+//        verify(service).getSong("Taylor Swift");
+//        Assert.assertEquals(controller.answerResult,"Taylor Swift");
     }
 
     @Test
@@ -70,6 +84,7 @@ public class ItunesSearchControllerTest {
         //then
         verify(songList.get(0)).setText((String.valueOf(itunesSearchFeed.results.get(0).trackName)));
         verify(artist.get(0)).setText((String.valueOf(itunesSearchFeed.results.get(0).artistName)));
+//        image.set(new Image(itunesSearchFeed.results.get(0).artworkUrl60()));
     }
 
     @Test

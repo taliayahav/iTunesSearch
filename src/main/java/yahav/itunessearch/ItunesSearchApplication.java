@@ -17,7 +17,7 @@ public class ItunesSearchApplication extends Application {
             loader.setController(controller);
             Parent parent = loader.load();
 
-            Scene scene = new Scene(parent, 800, 500);
+            Scene scene = new Scene(parent, 800, 350);
 
             stage.setTitle("iTunes");
             stage.setScene(scene);

@@ -68,7 +68,7 @@ public class ItunesSearchController {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                for (int i= 0; i <= 5; i++) {
+                for (int i= 0; i <= songList.size(); i++) {
                     songList.get(i).setText(String.valueOf(itunesSearchFeed.results.get(i).trackName));
                     artist.get(i).setText(String.valueOf(itunesSearchFeed.results.get(i).artistName));
                     image.get(i).setImage(new Image(itunesSearchFeed.results.get(i).artworkUrl60));
@@ -81,7 +81,7 @@ public class ItunesSearchController {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                for (int i= 0; i <= 5; i++) {
+                for (int i= 0; i <= albumNames.size(); i++) {
                     albumNames.get(i).setText(String.valueOf(albumSearchFeed.results.get(i).collectionName));
                     albumImages.get(i).setImage(new Image(albumSearchFeed.results.get(i).artworkUrl100));
                 }

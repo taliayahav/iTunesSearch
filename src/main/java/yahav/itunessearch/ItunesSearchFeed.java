@@ -8,6 +8,5 @@ public class ItunesSearchFeed {
         String trackName;
         String artistName;
         String artworkUrl60;
-        String previewURL;
     }
 }
