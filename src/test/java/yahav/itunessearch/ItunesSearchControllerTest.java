@@ -25,6 +25,7 @@ public class ItunesSearchControllerTest {
     private List<Label>artist;
     private List<ImageView>image;
     private List<Label>albumNames;
+    private List<ImageView>albumImages;
     TextField answerResult;
 
     @BeforeClass
@@ -56,14 +57,13 @@ public class ItunesSearchControllerTest {
         controller.answerResult =  answerResult;
         doReturn(Single.never()).when(service).getSong("Taylor Swift");
         doReturn(Single.never()).when(service).getAlbum("Taylor Swift");
-//        doReturn("Taylor Swift").when(controller.answerResult).getText();
+        doReturn("Taylor Swift").when(controller.answerResult).getText();
 
         //when
         controller.onSubmit(mock(MouseEvent.class));
 
         //then
-//        verify(service).getSong("Taylor Swift");
-//        Assert.assertEquals(controller.answerResult,"Taylor Swift");
+        verify(service).getSong("Taylor Swift");
     }
 
     @Test
@@ -84,7 +84,7 @@ public class ItunesSearchControllerTest {
         //then
         verify(songList.get(0)).setText((String.valueOf(itunesSearchFeed.results.get(0).trackName)));
         verify(artist.get(0)).setText((String.valueOf(itunesSearchFeed.results.get(0).artistName)));
-//        image.set(new Image(itunesSearchFeed.results.get(0).artworkUrl60()));
+ //       verify(image.get(0)).setImage(any(Image.class));
     }
 
     @Test
@@ -94,12 +94,16 @@ public class ItunesSearchControllerTest {
         albumSearchFeed.results = Arrays.asList(mock(AlbumSearchFeed.Album.class));
         albumNames = Arrays.asList(mock(Label.class));
         controller.albumNames = albumNames;
+        albumImages = Arrays.asList(mock(ImageView.class));
+        controller.albumImages = albumImages;
 
         //when
         controller.onAlbumSearchFeed(albumSearchFeed);
 
         //then
         verify(albumNames.get(0)).setText((String.valueOf(albumSearchFeed.results.get(0).collectionName)));
+//        verify(albumImages.get(0)).setImage(any(Image.class));
+
     }
 
     public void onError(){
